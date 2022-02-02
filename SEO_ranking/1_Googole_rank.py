@@ -6,8 +6,9 @@ from bs4 import BeautifulSoup
 hdr = {
     "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.71 Safari/537.36"}
 
-Moneysite = "http://e-beauty.co.kr/".replace("https://", "").replace("http://", "").replace("www.", "").replace("/", "")
-Keywords = "의정부치아교정, 의정부교정치과, 의정부교정, 양주교정치과, 포천교정치과, 비발치교정".split(", ")
+Moneysite = "https://onlinecasino79.com/".replace("https://", "").replace(
+    "http://", "").replace("www.", "").replace("/", "")
+Keywords = "카지노사이트, 바카라사이트, 블랙잭사이트, 룰렛사이트".split(", ")
 Ranking = []
 Date_now = datetime.date.today()
 
@@ -34,7 +35,8 @@ for Keyword in Keywords:
         for idx, data in enumerate(data_rows):
             # 루트 도메인만 추출해서 페이지와 순위 표시
             # 도메인만 추출 후 타겟 url과 일치하면 기록하기
-            target_url = urlparse(data.find("a")["href"]).netloc.replace("www.", "")
+            target_url = urlparse(
+                data.find("a")["href"]).netloc.replace("www.", "")
             if target_url == Moneysite:
                 Ranking.append(f"{Keyword}: {page_num+1}페이지 {idx+1}위")
                 print(f"{Keyword}: {page_num+1}페이지 {idx+1}위")

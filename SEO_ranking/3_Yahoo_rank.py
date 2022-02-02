@@ -6,14 +6,18 @@ from bs4 import BeautifulSoup
 hdr = {
     "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.71 Safari/537.36"}
 
-Moneysite = "https://snshelper.com/".replace("https://", "").replace("http://", "").replace("www.", "").replace("/", "")
-Keywords = "日本人フォロワー, 日本人アカウントフォロワー, インスタグラム日本人フォロワー購入・増やす サービス, 日本人いいね, 日本人アカウントいいね, インスタグラム日本人いいねサービス".split(", ")
+Moneysite = "https://snshelper.com/".replace("https://", "").replace(
+    "http://", "").replace("www.", "").replace("/", "")
+Keywords = "日本人フォロワー, 日本人アカウントフォロワー, インスタグラム日本人フォロワー購入・増やす サービス, 日本人いいね, 日本人アカウントいいね, インスタグラム日本人いいねサービス".split(
+    ", ")
 Ranking = []
 Date_now = datetime.date.today()
 
+print()
+print(f"{Moneysite}검색 시작")
+print("Google 검색일자: " + f"{Date_now}")
 
 for Keyword in Keywords:
-    print(f"{Keyword} 검색 시작")
     for page_num in range(0, 100):
         url = f"https://search.yahoo.co.jp/search?p={Keyword}&b={page_num}1"
 
@@ -34,7 +38,8 @@ for Keyword in Keywords:
         for idx, data in enumerate(data_rows):
             # 루트 도메인만 추출해서 페이지와 순위 표시
             # 도메인만 추출 후 타겟 url과 일치하면 기록하기
-            target_url = urlparse(data.find("a")["href"]).netloc.replace("www.", "")
+            target_url = urlparse(
+                data.find("a")["href"]).netloc.replace("www.", "")
             if target_url == Moneysite:
                 Ranking.append(f"{Keyword}: {page_num+1}페이지 {idx+1}위")
                 print(f"{Keyword}: {page_num+1}페이지 {idx+1}위")
@@ -49,7 +54,7 @@ for Keyword in Keywords:
         if next_button:
             continue
         else:
-            print(f"{Keyword}: {page_num+1}페이지 까지 노출 안되고 있음")
+            print(f"{Keyword}: - (~{page_num+1})")
             Ranking.append(f"{Keyword}: -")
             break
 
