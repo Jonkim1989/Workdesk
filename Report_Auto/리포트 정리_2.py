@@ -5,7 +5,7 @@ import openpyxl
 import os
 from os import walk
 
-path_1 = r"C:\Users\kangg\Desktop\리포트 마무리\pd작업"
+path_1 = r"C:\Users\kangg\Desktop\리포트 마무리\작업 대기\pd작업"
 path_2 = r"C:\Users\kangg\Desktop\리포트 마무리"
 
 f = []
@@ -95,7 +95,7 @@ for full_name in f:
     ws["C7"].font = Font(name="나눔고딕", size=10)
     ws["C7"].alignment = Alignment(horizontal="center", vertical="center")
 
-    # 분석표 템플릿 넣기
+    # 분석표 템플릿 넣기 (삽입후 1픽셀씩 오른쪽, 아래 이동 하면 좋겠음)
     ws.merge_cells("A8:B8") # 분석표 자리 병합 하기
     ws.merge_cells("C8:D8") # 분석표 자리 병합 하기
     ws.row_dimensions[8].height = 320
@@ -104,7 +104,10 @@ for full_name in f:
 
     # 검색순위 넣기
     ws.merge_cells("A9:B9") # 검색순위 자리 병합 하기
+    ws["A9"].alignment = Alignment(horizontal="center", vertical="center")
+
     ws.merge_cells("C9:D9") # 검색순위 자리 병합 하기
+    ws["C9"].alignment = Alignment(horizontal="center", vertical="center")
     ws.row_dimensions[9].height = 100
 
     # 마지막 줄에 푸터 삽입
