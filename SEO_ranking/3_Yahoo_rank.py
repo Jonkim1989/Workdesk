@@ -8,14 +8,13 @@ hdr = {
 
 Moneysite = "https://snshelper.com/".replace("https://", "").replace(
     "http://", "").replace("www.", "").replace("/", "")
-Keywords = "日本人フォロワー, 日本人アカウントフォロワー, インスタグラム日本人フォロワー購入・増やす サービス, 日本人いいね, 日本人アカウントいいね, インスタグラム日本人いいねサービス".split(
-    ", ")
+Keywords = "日本人フォロワー, 日本人アカウントフォロワー, インスタグラム日本人フォロワー購入・増やす サービス, 日本人いいね, 日本人アカウントいいね, インスタグラム日本人いいねサービス".split(", ")
 Ranking = []
 Date_now = datetime.date.today()
 
 print()
 print(f"{Moneysite}검색 시작")
-print("Google 검색일자: " + f"{Date_now}")
+print("Yahoo 검색일자: " + f"{Date_now}")
 
 for Keyword in Keywords:
     for page_num in range(0, 100):

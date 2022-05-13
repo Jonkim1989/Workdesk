@@ -5,8 +5,8 @@ import openpyxl
 import os
 from os import walk
 
-path_1 = r"C:\Users\kangg\Desktop\리포트 마무리\작업 대기\pd작업"
-path_2 = r"C:\Users\kangg\Desktop\리포트 마무리"
+path_1 = r"C:\Users\jonkim\Desktop\리포트 마무리\1. 작업 대기\pd작업"
+path_2 = r"C:\Users\jonkim\Desktop\리포트 마무리"
 
 f = []
 
@@ -14,7 +14,7 @@ f = []
 for (dirpath, dirnames, filenames) in walk(path_1):
     f.extend(filenames)
     break # 이 break가 꼭 필요할까?
-
+ 
 for full_name in f:
     wb = openpyxl.load_workbook(path_1 + "\\" + full_name)
     ws = wb.active
@@ -81,7 +81,7 @@ for full_name in f:
 
     # 로고 삽입
     ws.merge_cells("A3:D6") # 로고 자리 병합 하기
-    ws.add_image(Image("C:/Users/kangg/Desktop/마케스터즈 잡다/마케스터즈 로고 MAX.bmp"), "A3")  # 이미지를 A3 위치에 삽입
+    ws.add_image(Image("C:/Users/jonkim/Desktop/마케스터즈 잡다/마케스터즈 로고 MAX.bmp"), "A3")  # 이미지를 A3 위치에 삽입
 
     # 작업 전, 후 분석표 넣기
     ws.merge_cells("A7:B7") # 로고 자리 병합 하기
@@ -99,14 +99,16 @@ for full_name in f:
     ws.merge_cells("A8:B8") # 분석표 자리 병합 하기
     ws.merge_cells("C8:D8") # 분석표 자리 병합 하기
     ws.row_dimensions[8].height = 320
-    ws.add_image(Image("C:/Users/kangg/Desktop/마케스터즈 잡다/분석표 템플릿.bmp"), "A8")  # 이미지를 A8 위치에 삽입
-    ws.add_image(Image("C:/Users/kangg/Desktop/마케스터즈 잡다/분석표 템플릿.bmp"), "C8")  # 이미지를 A8 위치에 삽입
+    ws.add_image(Image("C:/Users/jonkim/Desktop/마케스터즈 잡다/분석표 템플릿.bmp"), "A8")  # 이미지를 A8 위치에 삽입
+    ws.add_image(Image("C:/Users/jonkim/Desktop/마케스터즈 잡다/분석표 템플릿.bmp"), "C8")  # 이미지를 A8 위치에 삽입
 
     # 검색순위 넣기
     ws.merge_cells("A9:B9") # 검색순위 자리 병합 하기
+    ws["A9"].font = Font(name="나눔고딕", size=10)
     ws["A9"].alignment = Alignment(horizontal="center", vertical="center")
 
     ws.merge_cells("C9:D9") # 검색순위 자리 병합 하기
+    ws["C9"].font = Font(name="나눔고딕", size=10)
     ws["C9"].alignment = Alignment(horizontal="center", vertical="center")
     ws.row_dimensions[9].height = 100
 

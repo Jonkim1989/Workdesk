@@ -5,8 +5,8 @@ import openpyxl
 import os
 from os import walk
 
-path_1 = r"C:\Users\kangg\Desktop\리포트 마무리\장기 작업"
-path_2 = r"C:\Users\kangg\Desktop\리포트 마무리\장기 업데이트"
+path_1 = r"C:\Users\jonkim\Desktop\리포트 마무리\장기 작업"
+path_2 = r"C:\Users\jonkim\Desktop\리포트 마무리\장기 업데이트"
 
 f = []
 
@@ -29,6 +29,8 @@ for full_name in f:
             break
 
     ws.delete_rows(top_label, ws.max_row - top_label)  # 백링크 처음부터 푸터 전까지 삭제 후 당김
+    footer_x = ws.max_row
+    ws.merge_cells(f"A{footer_x}:D{footer_x}")  # 병합 하기
 
     # 저장하기
 

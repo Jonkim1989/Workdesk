@@ -2,8 +2,9 @@ import os
 from os import walk
 import pandas as pd
 
-path_1 = r"C:\Users\kangg\Desktop\리포트 마무리\작업 대기"
-path_2 = r"C:\Users\kangg\Desktop\리포트 마무리\pd작업"
+path_1 = r"C:\Users\jonkim\Desktop\리포트 마무리\1. 작업 대기"
+path_2 = r"C:\Users\jonkim\Desktop\리포트 마무리\1. 작업 대기\pd작업"
+path_3 = r"C:\Users\jonkim\Desktop\리포트 마무리\GSA용"
 
 f = []
 f_name = []
@@ -34,7 +35,7 @@ for j in f_name:
         df = pd.read_excel(path_1 + "\\" + file_name)
 
         df.dropna(inplace=True)  # 빈 셀이 있는 행을 삭제
-        df.drop_duplicates(inplace=True)  # 중복 항목 제거
+        # df.drop_duplicates(inplace=True)  # 중복 항목 제거
 
         # 필요없는 열 삭제
         df.drop(["Status", "Username", "Password", "E-Mail"],
@@ -45,15 +46,20 @@ for j in f_name:
 
         # 제거할 도메인 리스트
         drop_list = ["Site URL",
-                     "simplesite.com",
-                     "edublogs.org",
-                     "penzu.com",
-                     "storeboard.com",
-                     "theglensecret.com",
-                     "theburnward.com",
-                     "fotosdefrases.com",
-                     "zenwriting.net",
-                     "onfeetnation.com"]
+                     #"simplesite.com",
+                     #"edublogs.org",
+                     #"penzu.com",
+                     #"storeboard.com",
+                     #"theglensecret.com",
+                     #"theburnward.com",
+                     #"fotosdefrases.com",
+                     #"zenwriting.net",
+                     #"onfeetnation.com",
+                     #"writeablog.net",
+                     "cavandoragh.org",
+                     "evernote.com",
+                     "postheaven.net"
+                     ]
 
         # for문을 통해 도메인이 있는 행을 제거
         for h in drop_list:
@@ -71,12 +77,16 @@ for j in f_name:
 
     # 저장 전 Tasks 순서대로 정렬하기
     excel_2 = pd.DataFrame()
+    text_GSA = pd.DataFrame()
     Tasks = ["Web 2.0 Blogs", "Social Bookmarking",
              "Authority Links", "Edu", "URL Shortener"]
 
     for t in Tasks:
         temp_task = excel[excel["Task ID"].str.contains(t)]
         excel_2 = excel_2.append(temp_task, ignore_index=True)
+        if t == "Web 2.0 Blogs":
+            text_GSA = text_GSA.append(temp_task, ignore_index=True)
+
 
     # 최종 데이터의 총 row 수를 저장
     las_row = len(excel_2)
@@ -84,6 +94,10 @@ for j in f_name:
     # 엑셀로 정리하기 전에 정렬하기, 이후 꾸미기까지
     excel_2.to_excel(f"{path_2}\\{j}{las_row}.xlsx", index=False)
 
+    # GSA 필요없는 열 삭제
+    text_GSA.drop(["Task ID", "Site URL", "D.A."], axis="columns", inplace=True)
+    # 인댁스 줄 삭제
+    text_GSA.to_csv(f"{path_3}\\{j}.txt", index=False, header = None)
 
 # drop_list를 외부로 꺼내서 def 형식으로 불러오게 해야함
 # 판다스 작업은 끝났고 엑셀로 꾸미는 코드를 짜야함

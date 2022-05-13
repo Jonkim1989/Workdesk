@@ -6,15 +6,16 @@ from bs4 import BeautifulSoup
 hdr = {
     "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.71 Safari/537.36"}
 
-Moneysite = "https://onlinecasino79.com/".replace("https://", "").replace(
+Moneysite = "www.gunmalove.com".replace("https://", "").replace(
     "http://", "").replace("www.", "").replace("/", "")
-Keywords = "카지노사이트, 바카라사이트, 블랙잭사이트, 룰렛사이트".split(", ")
+Keywords = "마사지, 건마, 스웨디시, 1인샵".split(", ")
 Ranking = []
 Date_now = datetime.date.today()
 
 print()
 print(f"{Moneysite}검색 시작")
 print("Google 검색일자: " + f"{Date_now}")
+print()
 
 for Keyword in Keywords:
     for page_num in range(0, 100):
@@ -51,7 +52,8 @@ for Keyword in Keywords:
         if next_button:
             continue
         else:
-            print(f"{Keyword}: - (~{page_num+1})")
+            # print(f"{Keyword}: - (~{page_num+1})")
+            print(f"{Keyword}: -")
             Ranking.append(f"{Keyword}: -")
             break
 
