@@ -1,3 +1,9 @@
+# 리포트 마무리에 해더와 푸터, 분석표 들어갈 자리와 검색 순위 자리 꾸미는 코드
+
+
+
+#-----------------------------------------
+
 from asyncio import futures
 from openpyxl.drawing.image import Image
 from openpyxl.styles import PatternFill, colors, Font, Alignment

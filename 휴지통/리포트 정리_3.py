@@ -1,3 +1,7 @@
+# 리포트 꾸미기 이후 파일명에 총 작업량 수량을 표시하는 코드
+
+
+#---------------------------------------------------
 from asyncio import futures
 from openpyxl.drawing.image import Image
 from openpyxl.styles import PatternFill, colors, Font, Alignment

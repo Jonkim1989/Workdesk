@@ -1,9 +1,16 @@
-import os
+# 2022.11.10 리포트 정리 코드 
+# 동일 작업 묶기, 공백 제거, 정렬, 헤더 꾸미기, 작업량 표시 한번에 진행
+
+#------------------------------------------------------------------------
+
+
+from openpyxl.styles import PatternFill, colors, Font, Alignment
+import openpyxl
 from os import walk
 import pandas as pd
 
-path_1 = r"C:\Users\jonkim\Desktop\리포트 마무리\1. 작업 대기"
-path_2 = r"C:\Users\jonkim\Desktop\리포트 마무리\1. 작업 대기\pd작업"
+path_1 = r"C:\Users\jonkim\Desktop\리포트 마무리\1. 작업 대기\리포트 정리"
+path_2 = r"C:\Users\jonkim\Desktop\리포트 마무리\1. 작업 대기\리포트 정리\완료"
 path_3 = r"C:\Users\jonkim\Desktop\리포트 마무리\GSA용"
 
 f = []
@@ -56,9 +63,11 @@ for j in f_name:
                      #"zenwriting.net",
                      #"onfeetnation.com",
                      #"writeablog.net",
-                     "cavandoragh.org",
-                     "evernote.com",
-                     "postheaven.net"
+                     #"cavandoragh.org",
+                     #"evernote.com",
+                     "postheaven.net",
+                     #"bloggersdelight.dk"
+                     "doodlekit.com"
                      ]
 
         # for문을 통해 도메인이 있는 행을 제거
@@ -78,6 +87,8 @@ for j in f_name:
     # 저장 전 Tasks 순서대로 정렬하기
     excel_2 = pd.DataFrame()
     text_GSA = pd.DataFrame()
+    
+    # 만약 Tasks 에 항목이 빠지면 진행 불가, 없으면 넘어가는 코드 작성 필요
     Tasks = ["Web 2.0 Blogs", "Social Bookmarking",
              "Authority Links", "Edu", "URL Shortener"]
 
@@ -98,8 +109,41 @@ for j in f_name:
     text_GSA.drop(["Task ID", "Site URL", "D.A."], axis="columns", inplace=True)
     # 인댁스 줄 삭제
     text_GSA.to_csv(f"{path_3}\\{j}.txt", index=False, header = None)
+    
 
-# drop_list를 외부로 꺼내서 def 형식으로 불러오게 해야함
-# 판다스 작업은 끝났고 엑셀로 꾸미는 코드를 짜야함
+#---------------------------------------------------------
 
-# 이걸 하나하나 코드로 짤것인지 아니면 템플릿과 합쳐서 따로 저장할 것인지 생각해야 한다.
+
+    wb = openpyxl.load_workbook(f"{path_2}\\{j}{las_row}.xlsx")
+    ws = wb.active
+   
+    # 1차 가공 - 셀 정렬, 크기 조절, 폰트 변경
+
+    for row in ws.rows:
+        for cell in row:
+            # 셀 폰트 변경
+            cell.font = Font(name="Calibri", size=11)
+            
+            # D.A column 중앙 정렬
+            if cell.column == 3:
+                cell.alignment = Alignment(horizontal="center", vertical="center")
+
+    # column 크기 조절
+    ws.column_dimensions["A"].width = 24
+    ws.column_dimensions["B"].width = 40
+    ws.column_dimensions["C"].width = 10
+    ws.column_dimensions["D"].width = 130
+
+
+
+    # 해더 색상 입히기
+    for row in ws["A1:D1"]:
+        for cell in row:
+            cell.font = Font(name="Calibri", size=11, color=colors.WHITE, bold=True)
+            cell.alignment = Alignment(horizontal="center", vertical="bottom")
+            cell.fill = PatternFill(start_color="366092", fill_type="solid")
+
+    
+    # 저장하기
+    wb.save(f"{path_2}\\{j}{las_row}.xlsx")
+

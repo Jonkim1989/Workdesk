@@ -6,11 +6,11 @@ from bs4 import BeautifulSoup
 hdr = {
     "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.71 Safari/537.36"}
 
-Moneysite = "www.gunmalove.com".replace("https://", "").replace(
+Moneysite = "http://www.e-beauty.co.kr/".replace("https://", "").replace(
     "http://", "").replace("www.", "").replace("/", "")
-Keywords = "마사지, 건마, 스웨디시, 1인샵".split(", ")
+Keywords = "의정부치아교정, 의정부교정치과, 의정부교정, 양주교정치과, 포천교정치과, 비발치교정".split(", ")
 Ranking = []
-Date_now = datetime.date.today()
+Date_now = datetime.date.today()  
 
 print()
 print(f"{Moneysite}검색 시작")

@@ -6,9 +6,9 @@ from bs4 import BeautifulSoup
 hdr = {
     "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.71 Safari/537.36"}
 
-Moneysite = "paxbikena.com".replace("https://", "").replace(
+Moneysite = "http://www.e-beauty.co.kr/".replace("https://", "").replace(
     "http://", "").replace("www.", "").replace("/", "")
-Keywords = "마이프로틴".split(", ")
+Keywords = "의정부치아교정, 의정부교정치과, 의정부교정, 양주교정치과, 포천교정치과, 비발치교정".split(", ")
 Ranking = []
 Date_now = datetime.date.today()
 
@@ -29,7 +29,7 @@ for Keyword in Keywords:
 
         # url 정보를 html 문서로 저장하기 (매번 하지 않도록 완성시 주석 처리하기)
         # with open("Naver_sample.html", "w", encoding="utf8") as f:
-        #     f.write(soup.prettify())
+        #    f.write(soup.prettify())
 
         # 가져온 url 정보 중 필요한 내용만 찾아내기
         data_rows = soup.find_all("div", attrs={"class": "source_box"})
@@ -78,4 +78,5 @@ for i in Ranking:
 # 이제 엑셀 다루는 강의를 들어야겠다
 # 키워드들 맨 처음  키워드를 검색하게하면 <NameError: name 'target_url' is not defined> 라는 에러메시지가 뜬다. 
 # 이상하게 2번째로 배치하면 진행이된다. 뭐지
-    
+# 네이버 검색시 일반 노출이 있고 Npay 노출이 있다. Npay 노출시 hrefs 주소가 바로 가는게 아니라 네이버페이 주소를 통해 리다이렉트 되는 형식이다
+# 둘다 검색할 수 있는 기능을 추가해야한다.
